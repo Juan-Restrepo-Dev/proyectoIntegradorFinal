@@ -1,0 +1,55 @@
+# Node
+node_modules/
+frontend/node_modules/
+
+# Build
+/dist/
+frontend/dist/
+
+# Logs
+*.log
+
+# Python
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+backend/__pycache__/
+
+# Virtualenv
+backend/.venv/
+venv/
+
+# IDE
+.vscode/
+.idea/
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Env
+.env
+*.env
+
+# Firebase
+*.json
+
+# Images
+*.png
+*.jpg
+*.jpeg
+*.gif
+*.rar
+
+# Misc
+*.bak
+*.swp
+
+# Generated
+backend/generated_image.png
+
+
+
+# Others
+imagenes-base/

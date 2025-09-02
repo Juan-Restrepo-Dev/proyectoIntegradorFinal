@@ -1,0 +1,9 @@
+fastapi[standard]
+openai 
+requests 
+python-dotenv
+google-genai
+gcloud
+langchain
+Pillow
+firebase-admin

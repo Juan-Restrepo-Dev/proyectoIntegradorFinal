@@ -1,0 +1,110 @@
+<div class="entities-layout">
+    <div class="entities-content">
+        <!-- Entity Tabs -->
+        <div class="entity-tabs">
+            <div class="tabs-header">
+                <div class="tabs-list" id="tabsList"></div>
+                <button id="addTabBtn" class="btn btn-primary">➕ Nueva Hoja</button>
+                </div>
+            </div>
+
+        <!-- Entity Content -->
+        <div class="entity-content">
+            <div class="entity-toolbar">
+                <div class="toolbar-left">
+                    <button id="addRowBtn" class="btn btn-secondary">➕ Agregar Fila</button>
+                    <button id="addColumnBtn" class="btn btn-secondary">➕ Agregar Columna</button>
+                    </div>
+               
+                <div class="toolbar-right">
+                    <input type="text" id="searchInput" placeholder="Buscar..." class="search-input">
+                    <button id="exportBtn" class="btn btn-ghost">⬇ Exportar</button>
+                    <button id="importBtn" class="btn btn-ghost">⬆ Importar</button>
+                    <input type="file" id="importFile" accept=".csv" style="display:none">
+                    </div>
+                </div>
+
+            <!-- Excel-like Table -->
+            <div class="excel-table-container">
+                <table class="excel-table" id="excelTable">
+                    <thead>
+                        <tr id="headerRow"></tr>
+                        </thead>
+                    <tbody id="tableBody"></tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    <!-- Modal para nueva hoja -->
+    <div id="newSheetModal" class="modal hidden">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3>Nueva Hoja de Entidad</h3>
+                <button id="closeSheetModal" class="btn btn-ghost">✖</button>
+                </div>
+           
+            <form id="newSheetForm" class="modal-form">
+                <div class="form-group">
+                    <label for="sheetName">Nombre de la Hoja</label>
+                    <input type="text" id="sheetName" required>
+                    </div>
+               
+                <div id="columnsContainer"></div>
+                <button type="button" id="addColumnFieldBtn" class="btn btn-secondary">➕ Columna</button>
+
+                <div class="form-actions">
+                    <button type="button" id="cancelSheetBtn" class="btn btn-ghost">Cancelar</button>
+                    <button type="submit" class="btn btn-primary">Crear Hoja</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+
+    <!-- Modal para nueva columna -->
+    <div id="newColumnModal" class="modal hidden">
+        <div class="modal-content">
+            <h3>Nueva Columna</h3>
+            <p class="modal-subtitle">Usa la notación de punto para objetos anidados (ej: precios.moneda)</p>
+            <div class="form-group">
+                <label>Nombre de la Columna</label>
+                <input type="text" id="columnName" placeholder="Ej: nombre_producto o precios.original">
+                </div>
+            <div class="form-group">
+                <label>Tipo de Dato</label>
+                <select id="columnType">
+                    <option value="str">Texto</option>
+                    <option value="int">Número</option>
+                    <option value="list_str">Lista de Textos</option>
+                    <option value="object">Objeto (JSON)</option>
+                    <option value="image">Imagen Única</option>
+                    <option value="gallery">Galería de Imágenes</option>
+                    <option value="video_url">URL de Video</option>
+                    </select>
+                </div>
+            <div class="form-group">
+                <label><input type="checkbox" id="columnRequired"> Requerido</label>
+                </div>
+            <div class="form-actions">
+                <button type="button" id="cancelColumnBtn" class="btn btn-ghost">Cancelar</button>
+                <button type="button" id="saveColumnBtn" class="btn btn-primary">Agregar</button>
+                </div>
+            </div>
+        </div>
+   
+    <!-- Modal para ver/editar detalles de la fila -->
+    <div id="viewRowModal" class="modal hidden">
+        <div class="modal-content large">
+            <div class="modal-header">
+                <h3>Detalles del Registro</h3>
+                <button id="closeViewModal" class="btn btn-ghost">✖</button>
+                </div>
+            <div class="modal-body" id="rowDataFormContainer">
+                <!-- El formulario dinámico se insertará aquí -->
+                </div>
+            <div class="modal-footer">
+                <button id="cancelViewModal" class="btn btn-ghost">Cancelar</button>
+                <button id="saveViewModal" class="btn btn-primary">Guardar Cambios</button>
+                </div>
+             </div>
+         </div>
+    </div>

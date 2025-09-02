@@ -1,0 +1,67 @@
+<div class="publication-modal-ai">
+    <div class="modal-section">
+        <h4>Generar contenido con IA</h4>
+            <form id="aiForm" class="ai-form">
+                <div class="form-group">
+                    <div class="toolbar">
+                        <label>Entidad:
+                            <select id="entitySelect"></select>
+                        </label>
+
+                        <label>Dato (Nombre):
+                            <select id="recordSelect"></select>
+                        </label>
+                    </div>
+
+                    <div id="selectionResult"></div>
+                </div>
+                <div class="form-group">
+                    <label for="aiPrompt">Describe tu idea o tema</label>
+                    <textarea id="aiPrompt" rows="4"
+                        placeholder="Ej: Quiero crear un post sobre los beneficios de nuestra nueva tarjeta de crédito para jóvenes profesionales..."
+                        required></textarea>
+                </div>
+                <div class="form-group">
+                    <label for="pubPlatform">Plataforma</label>
+                    <select id="pubPlatform" required>
+                        <option value="">Seleccionar plataforma</option>
+                        <option value="instagram" ${this.publication.platform==='instagram' ? 'selected' : '' }>Instagram
+                        </option>
+                        <option value="facebook" ${this.publication.platform==='facebook' ? 'selected' : '' }>Facebook
+                        </option>
+                        <option value="twitter" ${this.publication.platform==='twitter' ? 'selected' : '' }>Twitter</option>
+                        <option value="linkedin" ${this.publication.platform==='linkedin' ? 'selected' : '' }>LinkedIn
+                        </option>
+                        <option value="tiktok" ${this.publication.platform==='tiktok' ? 'selected' : '' }>TikTok</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="pubType">Tipo de Publicación</label>
+                    <select id="pubType" required>
+                        <option value="post" ${this.publication.type==='post' ? 'selected' : '' }>Post</option>
+                        <option value="story" ${this.publication.type==='story' ? 'selected' : '' }>Story</option>
+                        <option value="reel" ${this.publication.type==='reel' ? 'selected' : '' }>Reel</option>
+                        <option value="video" ${this.publication.type==='video' ? 'selected' : '' }>Video</option>
+                    </select>
+                </div>
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="pubDate">Fecha</label>
+                        <input type="date" id="pubDate" value="${this.selectedDate || this.publication.date || ''}" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="pubTime">Hora</label>
+                        <input type="time" id="pubTime" value="${this.selectedTime || this.publication.time || ''}" required>
+                    </div>
+                </div>
+                <div class="form-actions">
+                    <button type="button" class="btn btn-ghost" id="backToMain">Atrás</button>
+                    <button type="submit" class="btn btn-primary" id="generateContent">
+                        <span class="btn-text">Generar Contenido</span>
+                        <span class="btn-loading hidden">Generando...</span>
+                    </button>
+                </div>
+            </form>
+    </div>
+</div>
