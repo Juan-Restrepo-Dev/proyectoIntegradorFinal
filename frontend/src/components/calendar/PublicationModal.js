@@ -86,7 +86,7 @@ export class PublicationModal extends Modal {
         <label for="aiPrompt">Describe tu idea o tema</label>
         <textarea id="aiPrompt" rows="4"
           placeholder="Ej: Quiero crear un post sobre los beneficios de nuestra nueva tarjeta de crédito..."
-          required></textarea>
+          ></textarea>
       </div>
       <div class="form-group">
         <label for="aiTone">Tono</label>
@@ -331,7 +331,8 @@ export class PublicationModal extends Modal {
           product_data: selectedRecord,
           ia_settings: {
             tone: this.getElement('#aiTone').value,
-            prompt: this.getElement('#aiPrompt').value,
+            prompt: this.getElement('#aiPrompt').value 
+            || "",
           }
         };
         const publicationData = {
@@ -388,7 +389,7 @@ export class PublicationModal extends Modal {
       console.log("Respuesta IA:", await aiResponse);
       this.generatedContent = {
         title: `Nuevo ${publicationData.platform.charAt(0).toUpperCase() + publicationData.platform.slice(1)} Post`,
-        content: `¡Descubre las increíbles ventajas de nuestros servicios! ${aiResponse[0].titulo_estrategia}`,
+        content: `¡Descubre las increíbles ventajas de nuestros servicios!`,
         platform: publicationData.platform,
         tone: publicationData.tone
       };

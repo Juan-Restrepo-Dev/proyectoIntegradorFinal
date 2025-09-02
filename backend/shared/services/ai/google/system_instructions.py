@@ -69,7 +69,7 @@ async def  generate_inference_instructions(
             contents=contents,
             config=generate_content_config,
         )
-        print("Respuesta completa de la API:", response)
+   
         # Retorna las partes de la respuesta
         return response.candidates[0].content.parts
 

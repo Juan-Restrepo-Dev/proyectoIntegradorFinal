@@ -3,7 +3,7 @@ import json
 
 def format_system_prompt_strategy(prompt_data):
     # Serializar los diccionarios de datos a cadenas JSON
-    plataform_json = json.dumps(prompt_data["platform_to_publish"], indent=2)
+    platform_json = json.dumps(prompt_data["platform_to_publish"], indent=2)
     product_json = json.dumps(prompt_data["product_data"], indent=2)
     company_json = json.dumps(prompt_data["company_data"], indent=2)
     
@@ -82,147 +82,95 @@ def format_system_prompt_strategy(prompt_data):
 
     # Formatear el prompt final pasando los strings JSON como valores de las variables.
     final_prompt = prompt.format(
-        platform_to_publish=plataform_json,
+        platform_to_publish=platform_json,
         product_data=product_json,
         company_data=company_json
     )
     
     return final_prompt
 
-def format_sytem_prompt_text_post():
-    pass
-     # Serializar los diccionarios de datos a cadenas JSON
-#     plataform_json = json.dumps(prompt_data["strategy"]["plataforma_a_publicar"], indent=2)
-#     product_json = json.dumps(prompt_data["product_data"], indent=2)
-#     company_json = json.dumps(prompt_data["company_data"], indent=2)
-    
-#     template_string = 
-#     {
-#     "plataforma_a_publicar": {
-#         "plataformas": [
-#             "Instagram",
-#             "TikTok",
-#             "Google Ads"
-#         ],
-#         "formatos_preferidos": [
-#             "Reel",
-#             "Video de unboxing",
-#             "Anuncio de carrusel (detalles)",
-#             "Anuncio de Shopping"
-#         ],
-#         "presupuesto_diario": "$20 USD",
-#         "duracion_campana": "15 días"
-#     },
-#     "product_data": {
-#         "nombre": "Nike Nocta Hombre",
-#         "descripcion_detallada": "Réplica AAA de alta calidad. Creado en colaboración con Drake. Tallas de 37 a 44, disponibles en varios colores. Incluye caja y etiquetas originales.",
-#         "sku": "NIKENOCTAH1",
-#         "precio_original": "$110 USD",
-#         "descuento_aplicado": "Envío gratis a nivel nacional",
-#         "beneficios_clave_para_el_cliente": [
-#             "Estilo exclusivo y a la moda",
-#             "Calidad garantizada (réplica AAA)",
-#             "Excelente relación calidad-precio",
-#             "Entrega rápida y segura"
-#         ],
-#         "caracteristicas_tecnicas": [
-#             "Material de alta durabilidad",
-#             "Réplica AAA",
-#             "Diseño de edición limitada (colaboración con Drake)",
-#             "Cómodos para uso diario"
-#         ]
-#     },
-#     "company_data": {
-#         "nombre_empresa": "Sneaker King",
-#         "descripcion_completa": "Tienda en línea especializada en réplicas AAA de zapatillas de alta gama. Ofrecemos productos de calidad y las últimas tendencias a precios asequibles.",
-#         "publico_objetivo": {
-#             "demografia": "Hombres de 18-30 años, con ingresos medios. Residentes en ciudades principales de Colombia. Amantes del streetwear.",
-#             "intereses": [
-#                 "Streetwear",
-#                 "moda urbana",
-#                 "colección de tenis",
-#                 "música urbana (hip hop, trap)",
-#                 "influencers de moda masculina"
-#             ],
-#             "puntos_de_dolor_a_resolver": [
-#                 "Los tenis originales son demasiado caros",
-#                 "El acceso a modelos de edición limitada es difícil",
-#                 "Miedo a comprar réplicas de mala calidad en línea"
-#             ]
-#         },
-#         "objetivo_estrategico_empresa": "Generar ventas directas de un producto específico para atraer nuevos clientes y fortalecer la imagen de la marca como un proveedor confiable.",
-#         "ubicacion_operativa": "Medellín, Colombia",
-#         "canales_de_venta": [
-#             "Tienda en línea",
-#             "Instagram DM",
-#             "WhatsApp"
-#         ],
-#         "alcance_geografico_actual": "A nivel nacional en Colombia."
-#     }
-# }
-#     {
-#   "response": [
-#     {
-#       "titulo_estrategia": "Sneaker King: Estilo Drake al Alcance - Campaña Nike Nocta",
-#       "objetivo_campana": "Generar ventas directas del modelo Nike Nocta Hombre, atraer nuevos clientes al ecosistema de Sneaker King y posicionar la marca como referente en réplicas AAA de alta calidad.",
-#       "analisis_publico_objetivo": {
-#         "perfil_demografico": "Hombres de 18 a 30 años, con ingresos medios, residentes en ciudades principales de Colombia (Bogotá, Medellín, Cali, Barranquilla). Interesados en moda urbana y coleccionismo de zapatillas.",
-#         "intereses": "Streetwear, moda urbana, colecciones de tenis exclusivas, música urbana (hip hop, trap), cultura sneaker, influencers de moda masculina, marcas deportivas de alta gama (Nike, Jordan)."
-#       },
-#       "concepto_creativo_publicacion": {
-#         "tipo_contenido": "Video corto tipo Reel/TikTok mostrando un 'unboxing' rápido y dinámico del Nike Nocta Hombre, destacando detalles de calidad (costuras, materiales, logo). Seguido por un clip corto de alguien usándolas en un contexto urbano/streetwear. Alternativamente, un carrusel de imágenes de alta calidad mostrando el producto desde diferentes ángulos, los colores disponibles y un slide final con el beneficio del envío gratis.",
-#         "mensaje_principal": "Eleva tu estilo con el exclusivo Nike Nocta, diseñado con Drake. Calidad AAA y envío gratis a todo Colombia. ¡El look que buscas, a tu alcance!"
-#       },
-#       "copys_publicacion": [
-#         {
-#           "enfoque": "Llamativo y Coleccionista",
-#           "texto": "¡Directo de la colaboración con Drake! 🦉🔥 Las Nike Nocta Hombre ya están aquí. Réplicas AAA con la calidad que mereces y el estilo que buscas. ¡No te quedes sin las tuyas! Envío GRATIS a nivel nacional. 🇨🇴 Haz tu pedido por DM o WhatsApp. #NikeNocta #Drake #SneakerKing #StreetwearColombia #ModaUrbana #TenisAAA"
-#         },
-#         {
-#           "enfoque": "Informativo y con Beneficios",
-#           "texto": "¿Cansado de precios imposibles? 🤔 Sneaker King te trae el Nike Nocta Hombre (Réplica AAA) en tallas 37-44, varios colores. Disfruta de materiales de alta durabilidad y el diseño exclusivo de Drake. ¡Lo mejor? ¡ENVÍO GRATIS a toda Colombia! 📦 Visita nuestra tienda en línea o contáctanos por WhatsApp para más info. #SneakerHead #ReplicaAAA #CalidadGarantizada #EnvioGratis #ModaMasculina #Nike"
-#         },
-#         {
-#           "enfoque": "Directo y de Urgencia",
-#           "texto": "¡Últimas unidades del Nike Nocta Hombre (Réplica AAA)! 🚀 Diseñado con Drake, calidad top, y ¡te lo enviamos GRATIS a casa! 🏠 Tallas disponibles: 37-44. ¡No dejes pasar esta oportunidad! Compra ahora vía DM o WhatsApp. ¡Stock limitado! #SneakerKing #NikeNocta #EdicionLimitada #Descuento #CompraOnline #TenisColombia"
-#         }
-#       ],
-#       "hashtags": [
-#         "#NikeNocta",
-#         "#Drake",
-#         "#SneakerKing",
-#         "#StreetwearColombia",
-#         "#ModaUrbana",
-#         "#TenisAAA",
-#         "#ReplicaAAA",
-#         "#SneakerHead",
-#         "#ModaMasculina",
-#         "#Colombia",
-#         "#MedellinStreetwear",
-#         "#HipHopCulture"
-#       ],
-#       "sugerencias_segmentacion": {
-#         "plataforma": "Instagram Ads y TikTok Ads",
-#         "datos_demograficos": "Hombres, 18-30 años. Residentes en: Bogotá D.C., Medellín, Cali, Barranquilla, Cartagena, Pereira, Bucaramanga. Idioma: Español.",
-#         "intereses_y_comportamientos": "Intereses en: Streetwear, Moda urbana, Zapatillas deportivas, Nike, Jordan, Drake, Hip hop, Trap, Música urbana, Influencers de moda masculina, Compras online. Comportamientos: Compradores que interactuaron con el comercio electrónico. Audiencias similares a clientes existentes (si se tienen datos)."
-#       },
-#       "kpis": [
-#         "Tasa de Clics (CTR) en el enlace/botón de compra: Objetivo > 2.5%",
-#         "Costo por Adquisición (CPA): Mantener por debajo de $15 USD por venta.",
-#         "Número de Ventas directas generadas (conversiones).",
-#         "Alcance y Frecuencia de la publicación.",
-#         "Tasa de Interacción (Engagement Rate) en Instagram/TikTok: Objetivo > 4%.",
-#         "Costo por Visualización del video (si aplica)."
-#       ]
-#     }
-#   ]
-# }
-    
-# Los datos de de ejemplo que recibiría la función
+def format_sytem_prompt_text_post(prompt_data):
+    platform_json = json.dumps(prompt_data["platform_to_publish"], indent=2)
+    product_json = json.dumps(prompt_data["product_data"], indent=2)
+    company_json = json.dumps(prompt_data["company_data"], indent=2)
+    post_strategy_json = json.dumps(prompt_data["post_estrategy"], indent=2)
 
+    template_string = """Eres un experto en marketing digital y copywriting, con un profundo conocimiento de las diferentes plataformas de redes sociales. Tu tarea es generar el texto (copy) para una publicación en Facebook o Instagram, basándote en la información proporcionada de la empresa y del producto, y siguiendo una estrategia de contenido específica.
 
-# Llamar a la función y obtener el prompt formateado
-# final_prompt_output = format_post_strategy(prompt_data_example)
+    El texto que generes debe ser persuasivo, atractivo y adaptado a la plataforma seleccionada. No olvides incluir un llamado a la acción (CTA) claro y una selección de hashtags relevantes.
 
-# Imprimir el resultado
-# print(final_prompt_output)
+    Datos a considerar:
+    "plataforma_a_publicar": {platform_to_publish},
+    "product_data": {product_data},
+    "company_data": {company_data},
+    "post_estrategy": {post_strategy}
+
+    Instrucciones de formato:
+      importante! debes responder en estructura json Debes responder únicamente con el texto del post No agreggues datos adicionales. No incluyas ningún texto introductorio, explicaciones, encabezados, viñetas o cualquier otro formato. La respuesta debe ser un bloque de texto plano, listo para ser copiado y pegado directamente en la red social.
+    """
+    prompt = PromptTemplate(
+        input_variables=["platform_to_publish", "product_data", "company_data", "post_strategy"],
+        template=template_string,
+    )
+    final_prompt = prompt.format(
+        platform_to_publish=platform_json,
+        product_data=product_json,
+        company_data=company_json,
+        post_strategy=post_strategy_json
+    )
+    return final_prompt
+
+def format_sytem_prompt_image_description(prompt_data):
+    platform_json = json.dumps(prompt_data["platform_to_publish"], indent=2)
+    product_json = json.dumps(prompt_data["product_data"], indent=2)
+    company_json = json.dumps(prompt_data["company_data"], indent=2)
+    post_strategy_json = json.dumps(prompt_data["post_estrategy"], indent=2)
+    # Serializar post_text correctamente (puede ser objeto Part, lista de Part, o texto)
+    def serialize_part(obj):
+        if isinstance(obj, list):
+            return [serialize_part(item) for item in obj]
+        if hasattr(obj, "text"):
+            return obj.text
+        return obj
+    post_text_serializable = serialize_part(prompt_data["post_text"])
+    post_text_json = json.dumps(post_text_serializable, indent=2)
+
+    template_string = """Eres un experto en marketing digital con una amplia experiencia en la creación de estrategias visuales y descripciones para redes sociales. Tu tarea es generar una descripción detallada para una publicación visual (imagen o video), basándote en la información de la empresa, del producto y en la estrategia de marketing proporcionada.
+
+    La descripción debe ser concisa y precisa, enfocándose en los elementos visuales clave que un generador de imágenes de IA podría utilizar, como el producto, el estilo, el ambiente, la audiencia, la ubicación, la escena, el foco, la composición y el texto sobre la imagen.
+
+    Asegúrate de incluir todos los siguientes elementos en la estructura de salida. No omitas ninguno.
+
+    Datos a considerar:
+    "plataforma_a_publicar": {platform_to_publish},
+    "product_data": {product_data},
+    "company_data": {company_data},
+    "post_estrategy": {post_strategy},
+    "post_text": {post_text}
+
+    Ejemplo de la estructura que debes seguir:
+    {{
+    "producto": "Nike Nocta Hombre Réplica AAA SKU NIKENOCTAH1",
+    "estilo": "Deportivo, urbano, premium, minimalista.",
+    "ambiente": "Frío, intenso, determinado, aspiracional.",
+    "audiencia": "Deportistas, juventud (18-30).",
+    "ubicacion": "Medellín, Colombia.",
+    "escena": "Atleta masculino (etnia diversa) en posición de salida en pista de atletismo al amanecer en Medellín. Cielo gélido, pista escarchada. Vaho visible de la respiración.",
+    "foco": "Atleta vistiendo conjunto completo {{producto}} (chaqueta negra mate, jogger, zapatillas blancas).",
+    "composicion": "Plano medio-cerrado, perspectiva baja.",
+    "texto": "Esto se cuece Cabrones"
+    }}
+    """
+    prompt = PromptTemplate(
+        input_variables=["platform_to_publish", "product_data", "company_data", "post_strategy", "post_text"],
+        template=template_string,
+    )
+    final_prompt = prompt.format(
+        platform_to_publish=platform_json,
+        product_data=product_json,
+        company_data=company_json,
+        post_strategy=post_strategy_json,
+        post_text=post_text_json
+    )
+    return final_prompt
+

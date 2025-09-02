@@ -5,7 +5,7 @@ from io import BytesIO
 import json
 from core.middleware.firebase_auth_guard import get_current_user_and_role
 from core.config import firestore_db
-from apps.generator.templates_prompt import format_system_prompt_strategy
+from apps.generator.templates_prompt import format_system_prompt_strategy, format_sytem_prompt_image_description, format_sytem_prompt_text_post
 from apps.generator.schema import SocialPostRequest
 from shared.services.ai.google.image import generate_ad_content
 from shared.services.ai.google.system_instructions import generate_inference_instructions
@@ -15,7 +15,7 @@ from shared.utils import raise_error
 my_project_id = "publitron-32a7e"
 
 "hacer esto dinamico para que pueda sr alterada la respuesta de el llm"
-json_schema = {
+json_schema_stategy = {
     "type":"OBJECT",
     "properties":{
         "titulo_estrategia":{
@@ -89,7 +89,41 @@ json_schema = {
     }
     }
 
+json_schema_text_post =  { "type":"OBJECT","properties":{ "text": { "type": "STRING" },  "imageMetadata":{ "type": "STRING" }, "videoMetadata":{ "type": "STRING" }} }
 
+json_schema_image_description = {
+  "type": "OBJECT",
+  "properties": {
+    "producto": {
+      "type": "STRING"
+      
+    },
+    "estilo": {
+      "type": "STRING"
+    },
+    "ambiente": {
+      "type": "STRING"
+    },
+    "audiencia": {
+      "type": "STRING"
+    },
+    "ubicacion": {
+      "type": "STRING"
+    },
+    "escena": {
+      "type": "STRING"
+    },
+    "foco": {
+      "type": "STRING"
+    },
+    "composicion": {
+      "type": "STRING"
+    },
+    "texto": {
+      "type": "STRING"
+    }
+  }
+}
 async def generate_post_strategy(data_strategy):
     if isinstance(data_strategy, dict):
         data_dict = data_strategy
@@ -98,7 +132,7 @@ async def generate_post_strategy(data_strategy):
     strategy = await generate_inference_instructions(
         format_system_prompt_strategy(data_dict),
         str(data_dict),
-        json_schema,
+        json_schema_stategy,
         my_project_id
     )
     response = []
@@ -110,62 +144,39 @@ async def generate_post_strategy(data_strategy):
     return response
 #   print("estrategia generada:", strategy)
 
-def generate_text(
-        context: str,
-        style: str = "profesional",
-        tone: str = "amigable",
-        platform: str = "instagram" ) -> str:
-    pass
-    
-def generate_image_description():
-    pass
-
-def generate_image():     
-    prompt_data = {
-        "producto": "Nike Nocta Hombre Réplica AAA SKU NIKENOCTAH1",
-        "estilo": "Deportivo, urbano, premium, minimalista.",
-        "ambiente": "Frío, intenso, determinado, aspiracional.",
-        "audiencia": "Deportistas, juventud (18-30).",
-        "ubicacion": "Medellín, Colombia.",
-        "escena": "Atleta masculino (etnia diversa) en posición de salida en pista de atletismo al amanecer en Medellín. Cielo gélido, pista escarchada. Vaho visible de la respiración.",
-        "foco": "Atleta vistiendo conjunto completo {producto} (chaqueta negra mate, jogger, zapatillas blancas).",
-        "composicion": "Plano medio-cerrado, perspectiva baja.",
-        "texto": "Esto se cuece Cabrones"
-    }
-
-    # --- Creación del Prompt Template de LangChain ---
-    template_string = """
-    Como diseñador gráfico, crea una imagen publicitaria:
-    Producto Clave: {producto} (Detalles y diseño exactos de la imagen de producto adjunta).
-    Elementos Esenciales Compartidos:
-    Estilo: {estilo}
-    Ambiente: {ambiente}
-    Audiencia: {audiencia}
-    Ubicación: {ubicacion}
-    Escena: {escena}
-    Foco: {foco}
-    Composición: {composicion}
-    Texto: {texto}
-    """
-
-    # 1. Resuelve las variables anidadas en los datos
-    prompt_data['escena'] = prompt_data['escena'].format(ubicacion=prompt_data['ubicacion'])
-    prompt_data['foco'] = prompt_data['foco'].format(producto=prompt_data['producto'])
-
-    # 2. Crea el objeto PromptTemplate con la plantilla y las variables
-    prompt_template = PromptTemplate(
-        template=template_string,
-        input_variables=list(prompt_data.keys())
+def generate_post_text(data_post_text):
+    if isinstance(data_post_text, dict):
+        data_dict = data_post_text
+    else:
+        data_dict = data_post_text.model_dump() if hasattr(data_post_text, 'model_dump') else data_post_text.dict()
+    post_text = generate_inference_instructions(
+        format_sytem_prompt_text_post(data_dict),
+        str(data_dict),
+        json_schema_text_post,
+        my_project_id
     )
+    return post_text
 
-    # 3. Formatea la plantilla con tus datos para obtener el prompt final
-    prompt_final_formateado = prompt_template.format(**prompt_data)
+def generate_image_description(data_image_description):
+    if isinstance(data_image_description, dict):
+        data_dict = data_image_description
+    else:
+        data_dict = data_image_description.model_dump() if hasattr(data_image_description, 'model_dump') else data_image_description.dict()
+    image_description = generate_inference_instructions(
+        format_sytem_prompt_image_description(data_dict),
+        str(data_dict),
+        json_schema_image_description,
+        my_project_id
+    )
+    return image_description
+
+def generate_image(url,PromptImage,):     
 
    
 
     generated_parts = generate_ad_content(
-        image_context_url ="https://standshop.com.co/wp-content/uploads/2024/09/9a053d4f-2ae7-4a18-9ca5-435f6b15410f.jpeg",
-        prompt_text=prompt_final_formateado,
+        image_context_url = url,
+        prompt_text=PromptImage,
         project_id=my_project_id
     )
  
@@ -180,9 +191,10 @@ def generate_image():
             print("\n--- Imagen Generada por la IA ---")
             print("Imagen guardada como 'generated_image.png'")
         else:
+            generate_image(url,PromptImage)
             print("No se generó imagen.")
 
-
+    return "aqui pongo la logica para devolver url de fire storage"
 
 
 
@@ -197,10 +209,19 @@ async def generate_social_post(basePrompt:SocialPostRequest,    user_data: dict 
         raise raise_error("Datos de la empresa no encontrados.", 404)
     print("Datos de la empresa obtenidos:", company_data_doc.to_dict())
     base_prompt_dict = basePrompt.model_dump()
+    print("Datos del prompt base:", base_prompt_dict['product_data']['multimedia']['main_image'])
     base_prompt_dict["company_data"] = company_data_doc.to_dict()
     post_strategy = await generate_post_strategy(base_prompt_dict)
+    base_prompt_dict["post_estrategy"] = post_strategy
+    post_text = await generate_post_text(base_prompt_dict)
+    base_prompt_dict["post_text"] = post_text
+    image_description = await generate_image_description(base_prompt_dict)
+    base_prompt_dict["image_description"] = image_description
+    url = base_prompt_dict['product_data']['multimedia']['main_image']
+    PromptImage = f"Como diseñador gráfico, crea una imagen publicitaria: basado en estos datos a tener en cuenta {base_prompt_dict}"
+    image_url = generate_image(url,PromptImage)
 
-    return res
+    return { "post_strategy": post_strategy, "post_text": post_text, "image_description": image_description, "image_url": image_url }
 # Nike Nocta Hombre Réplica AAA
 
 

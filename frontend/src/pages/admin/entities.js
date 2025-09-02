@@ -735,14 +735,14 @@ export default {
           ],
           "stock": 15,
           "availability": "en_stock",
-          "variant_images": ["https://placehold.co/100x100/EEE/000?text=W37"]
+          "variant_images": ["https://admin.digitalsport.com.ar/files/uploads/DIONYSOS%2022/NOCTA%20x%20Nike.png"]
         }],
         "technical_specifications": [
           { "name": "Upper Material", "value": "Cuero sintético premium" },
           { "name": "Quality", "value": "Réplica AAA" }
         ],
         "multimedia": {
-          "main_image": "https://placehold.co/400x400/FFF/000?text=Nike+1",
+          "main_image": "https://admin.digitalsport.com.ar/files/uploads/DIONYSOS%2022/NOCTA%20x%20Nike.png",
           "image_gallery": ["https://placehold.co/100x100/EEE/000?text=A", "https://placehold.co/100x100/DDD/000?text=B"],
           "product_video": "https://www.youtube.com/watch?v=dQw4w9WgXcQ"
         },
