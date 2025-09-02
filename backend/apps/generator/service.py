@@ -186,13 +186,19 @@ def generate_image(url,PromptImage,):
             print("--- Texto Generado por la IA ---")
             print(part.text)
         if part.inline_data is not None:
-            image = Image.open(BytesIO(part.inline_data.data))   
-            image.save("generated_image.png")
-            print("\n--- Imagen Generada por la IA ---")
-            print("Imagen guardada como 'generated_image.png'")
+            if part.inline_data.data is not None:
+                image = Image.open(BytesIO(part.inline_data.data))   
+                image.save("generated_image.png")
+                print("\n--- Imagen Generada por la IA ---")
+                print("Imagen guardada como 'generated_image.png'")
+            else:
+                print("No se generó imagen.")    
+                print("intentandolo nuevamente.")
+                generate_image(url,PromptImage)
         else:
-            generate_image(url,PromptImage)
-            print("No se generó imagen.")
+            
+            print("No se generó imagen hubo un error.")
+            
 
     return "aqui pongo la logica para devolver url de fire storage"
 
