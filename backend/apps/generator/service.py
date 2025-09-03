@@ -1,3 +1,5 @@
+import base64
+from shared.services.firebase_storage.firebase_storage import upload_image_to_storage
 from fastapi import Depends
 from langchain.prompts import PromptTemplate
 from PIL import Image
@@ -170,10 +172,10 @@ def generate_image_description(data_image_description):
     )
     return image_description
 
-def generate_image(url,PromptImage,):     
+async def generate_image(url,PromptImage,company_id):     
 
    
-
+    url_image= ""
     generated_parts = generate_ad_content(
         image_context_url = url,
         prompt_text=PromptImage,
@@ -191,6 +193,12 @@ def generate_image(url,PromptImage,):
                 image.save("generated_image.png")
                 print("\n--- Imagen Generada por la IA ---")
                 print("Imagen guardada como 'generated_image.png'")
+                if "," in part.inline_data.data:
+                    part.inline.data = part.inline.data.split(',')[1]
+
+                image_bytes = base64.b64decode(part.inline.data)
+                image_url = await upload_image_to_storage(image_bytes, company_id)
+                return image_url
             else:
                 print("No se generó imagen.")    
                 print("intentandolo nuevamente.")
@@ -200,7 +208,7 @@ def generate_image(url,PromptImage,):
             print("No se generó imagen hubo un error.")
             
 
-    return "aqui pongo la logica para devolver url de fire storage"
+
 
 
 
@@ -225,7 +233,7 @@ async def generate_social_post(basePrompt:SocialPostRequest,    user_data: dict 
     base_prompt_dict["image_description"] = image_description
     url = base_prompt_dict['product_data']['multimedia']['main_image']
     PromptImage = f"Como diseñador gráfico, crea una imagen publicitaria: basado en estos datos a tener en cuenta {base_prompt_dict}"
-    image_url = generate_image(url,PromptImage)
+    image_url =  await generate_image(url,PromptImage,empresa_id)
 
     return { "post_strategy": post_strategy, "post_text": post_text, "image_description": image_description, "image_url": image_url }
 # Nike Nocta Hombre Réplica AAA
