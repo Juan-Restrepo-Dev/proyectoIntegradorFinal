@@ -1,4 +1,5 @@
 import base64
+import uuid
 from shared.services.firebase_storage.firebase_storage import upload_image_to_storage
 from fastapi import Depends
 from langchain.prompts import PromptTemplate
@@ -126,6 +127,7 @@ json_schema_image_description = {
     }
   }
 }
+
 async def generate_post_strategy(data_strategy):
     if isinstance(data_strategy, dict):
         data_dict = data_strategy
@@ -189,20 +191,18 @@ async def generate_image(url,PromptImage,company_id):
             print(part.text)
         if part.inline_data is not None:
             if part.inline_data.data is not None:
+                filename = f"{uuid.uuid4()}"
+                destination_path = f"empresas/{company_id}/ia_generated/{filename}"
                 image = Image.open(BytesIO(part.inline_data.data))   
                 image.save("generated_image.png")
                 print("\n--- Imagen Generada por la IA ---")
                 print("Imagen guardada como 'generated_image.png'")
-                if "," in part.inline_data.data:
-                    part.inline.data = part.inline.data.split(',')[1]
-
-                image_bytes = base64.b64decode(part.inline.data)
-                image_url = await upload_image_to_storage(image_bytes, company_id)
+                image_url = await upload_image_to_storage(part.inline_data.data,  destination_path , part.inline_data.mime_type)
                 return image_url
             else:
                 print("No se generó imagen.")    
-                print("intentandolo nuevamente.")
-                generate_image(url,PromptImage)
+                # print("intentandolo nuevamente.")
+                # generate_image(url,PromptImage)
         else:
             
             print("No se generó imagen hubo un error.")

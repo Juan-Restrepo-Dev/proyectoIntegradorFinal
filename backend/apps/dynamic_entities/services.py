@@ -347,116 +347,116 @@ async def import_csv(company_id: str, entity_name: str, file: UploadFile):
 
 
 # async def import_csv_data_entity_company(entity_name: str, file: UploadFile = File(...), user_data: dict = Depends(get_current_user_and_role)):
-    """
-    Importa datos de un archivo CSV a una colección dinámica.
-    Requiere que exista un esquema para la entidad.
-    Acceso: 'owner', 'admin'.
-    Si el CSV contiene una columna 'galeria', se leerán los links,
-    se subirán las imágenes a Storage y se guardarán los nuevos enlaces en Firestore.
-    """
-    empresa_id = user_data.get('companyId')
+    # """
+    # Importa datos de un archivo CSV a una colección dinámica.
+    # Requiere que exista un esquema para la entidad.
+    # Acceso: 'owner', 'admin'.
+    # Si el CSV contiene una columna 'galeria', se leerán los links,
+    # se subirán las imágenes a Storage y se guardarán los nuevos enlaces en Firestore.
+    # """
+    # empresa_id = user_data.get('companyId')
     
-    # 1. Obtener el esquema de la entidad
-    schema_doc = firestore_db.collection(f'empresas/{empresa_id}/schemas').document(entity_name).get()
-    if not schema_doc.exists:
-        raise raise_error(f"Esquema para '{entity_name}' no encontrado. Crea un esquema antes de importar datos.", 404)
-    schema = schema_doc.to_dict()
+    # # 1. Obtener el esquema de la entidad
+    # schema_doc = firestore_db.collection(f'empresas/{empresa_id}/schemas').document(entity_name).get()
+    # if not schema_doc.exists:
+    #     raise raise_error(f"Esquema para '{entity_name}' no encontrado. Crea un esquema antes de importar datos.", 404)
+    # schema = schema_doc.to_dict()
 
-    try:
-        content = await file.read()
-        csv_file = StringIO(content.decode('utf-8'))
-        csv_reader = csv.DictReader(csv_file)
+    # try:
+    #     content = await file.read()
+    #     csv_file = StringIO(content.decode('utf-8'))
+    #     csv_reader = csv.DictReader(csv_file)
         
-        records_to_save = []
-        errors = []
+    #     records_to_save = []
+    #     errors = []
 
-        # 2. Iterar sobre las filas y validar/convertir
-        for i, row in enumerate(csv_reader):
-            clean_row = {k.strip(): v.strip() for k, v in row.items()}
-            record = {}
-            row_errors = []
+    #     # 2. Iterar sobre las filas y validar/convertir
+    #     for i, row in enumerate(csv_reader):
+    #         clean_row = {k.strip(): v.strip() for k, v in row.items()}
+    #         record = {}
+    #         row_errors = []
             
-            # --- Manejo de la columna 'galeria' ---
-            gallery_data = []
-            if 'galeria' in clean_row and clean_row['galeria']:
-                image_links = clean_row['galeria'].split(',')
-                for link in image_links:
-                    link = link.strip()
-                    if not link:
-                        continue
-                    try:
-                        response = requests.get(link, stream=True)
-                        response.raise_for_status() # Lanza un error si el request es inválido
+    #         # --- Manejo de la columna 'galeria' ---
+    #         gallery_data = []
+    #         if 'galeria' in clean_row and clean_row['galeria']:
+    #             image_links = clean_row['galeria'].split(',')
+    #             for link in image_links:
+    #                 link = link.strip()
+    #                 if not link:
+    #                     continue
+    #                 try:
+    #                     response = requests.get(link, stream=True)
+    #                     response.raise_for_status() # Lanza un error si el request es inválido
                         
-                        # Infiere el tipo de contenido de la imagen de la respuesta HTTP
-                        content_type = response.headers.get('Content-Type')
-                        if not content_type or not content_type.startswith('image/'):
-                            raise ValueError(f"URL de imagen inválida o tipo de contenido no es una imagen: '{link}'")
+    #                     # Infiere el tipo de contenido de la imagen de la respuesta HTTP
+    #                     content_type = response.headers.get('Content-Type')
+    #                     if not content_type or not content_type.startswith('image/'):
+    #                         raise ValueError(f"URL de imagen inválida o tipo de contenido no es una imagen: '{link}'")
 
-                        # Mapea tipos MIME a extensiones de archivo para el nombre
-                        mime_to_ext = {
-                            "image/jpeg": "jpg",
-                            "image/png": "png",
-                            "image/gif": "gif",
-                            "image/svg+xml": "svg",
-                            "image/webp": "webp"
-                        }
-                        file_ext = mime_to_ext.get(content_type, "jpg") # Usa .jpg como fallback
+    #                     # Mapea tipos MIME a extensiones de archivo para el nombre
+    #                     mime_to_ext = {
+    #                         "image/jpeg": "jpg",
+    #                         "image/png": "png",
+    #                         "image/gif": "gif",
+    #                         "image/svg+xml": "svg",
+    #                         "image/webp": "webp"
+    #                     }
+    #                     file_ext = mime_to_ext.get(content_type, "jpg") # Usa .jpg como fallback
                         
-                        filename = f"{uuid.uuid4()}.{file_ext}"
-                        destination_path = f"empresas/{empresa_id}/{entity_name}/{filename}"
+    #                     filename = f"{uuid.uuid4()}.{file_ext}"
+    #                     destination_path = f"empresas/{empresa_id}/{entity_name}/{filename}"
                         
-                        # Pasa el content_type inferido a la función de subida
-                        image_url = upload_image_to_storage(response.content, destination_path, content_type)
-                        if image_url:
-                            gallery_data.append({
-                                "link": image_url,
-                                "descripcion": f"Imagen para {entity_name}",
-                                "fecha_anadido": datetime.now().isoformat()
-                            })
-                        else:
-                            row_errors.append(f"No se pudo subir la imagen desde '{link}'.")
+    #                     # Pasa el content_type inferido a la función de subida
+    #                     image_url = upload_image_to_storage(response.content, destination_path, content_type)
+    #                     if image_url:
+    #                         gallery_data.append({
+    #                             "link": image_url,
+    #                             "descripcion": f"Imagen para {entity_name}",
+    #                             "fecha_anadido": datetime.now().isoformat()
+    #                         })
+    #                     else:
+    #                         row_errors.append(f"No se pudo subir la imagen desde '{link}'.")
 
-                    except (requests.exceptions.RequestException, ValueError) as e:
-                        row_errors.append(f"Error con la URL de la imagen '{link}': {e}")
+    #                 except (requests.exceptions.RequestException, ValueError) as e:
+    #                     row_errors.append(f"Error con la URL de la imagen '{link}': {e}")
             
-            if gallery_data:
-                record['galeria'] = gallery_data
+    #         if gallery_data:
+    #             record['galeria'] = gallery_data
 
-            # 3. Validar y convertir los otros campos
-            for field, props in schema.items():
-                if field == 'galeria':
-                    continue # Ya se ha manejado
+    #         # 3. Validar y convertir los otros campos
+    #         for field, props in schema.items():
+    #             if field == 'galeria':
+    #                 continue # Ya se ha manejado
                 
-                value = clean_row.get(field)
-                if props.get('required') and not value:
-                    row_errors.append(f"El campo '{field}' es requerido.")
-                    continue
+    #             value = clean_row.get(field)
+    #             if props.get('required') and not value:
+    #                 row_errors.append(f"El campo '{field}' es requerido.")
+    #                 continue
                 
-                if value is not None:
-                    converted_value = cast_value_to_type(value, props['type'])
-                    if converted_value is None and props['type'] != 'str':
-                         row_errors.append(f"El campo '{field}' debe ser de tipo '{props['type']}'.")
-                    record[field] = converted_value
+    #             if value is not None:
+    #                 converted_value = cast_value_to_type(value, props['type'])
+    #                 if converted_value is None and props['type'] != 'str':
+    #                      row_errors.append(f"El campo '{field}' debe ser de tipo '{props['type']}'.")
+    #                 record[field] = converted_value
             
-            if row_errors:
-                errors.append(f"Fila {i+2} (encabezado): " + " | ".join(row_errors))
-            else:
-                records_to_save.append(record)
+    #         if row_errors:
+    #             errors.append(f"Fila {i+2} (encabezado): " + " | ".join(row_errors))
+    #         else:
+    #             records_to_save.append(record)
         
-        if errors:
-            raise raise_error({"message": "Errores de validación encontrados en el archivo.", "errors": errors},400)
-        # 4. Guardar los datos en Firestore usando una escritura por lotes
-        batch = firestore_db.batch()
-        collection_ref = firestore_db.collection(f'empresas/{empresa_id}/{entity_name}')
-        for record in records_to_save:
-            doc_ref = collection_ref.document()
-            batch.set(doc_ref, record)
+    #     if errors:
+    #         raise raise_error({"message": "Errores de validación encontrados en el archivo.", "errors": errors},400)
+    #     # 4. Guardar los datos en Firestore usando una escritura por lotes
+    #     batch = firestore_db.batch()
+    #     collection_ref = firestore_db.collection(f'empresas/{empresa_id}/{entity_name}')
+    #     for record in records_to_save:
+    #         doc_ref = collection_ref.document()
+    #         batch.set(doc_ref, record)
         
-        await batch.commit()
+    #     await batch.commit()
         
-        return {"message": f"Importación exitosa. {len(records_to_save)} documentos creados en '{entity_name}'."}
+    #     return {"message": f"Importación exitosa. {len(records_to_save)} documentos creados en '{entity_name}'."}
 
-    except Exception as e:
-        print(f"Error en la importación de CSV: {e}")
-        raise raise_error("'message': 'Ocurrió un error al procesar el archivo CSV.'",500)
+    # except Exception as e:
+    #     print(f"Error en la importación de CSV: {e}")
+    #     raise raise_error("'message': 'Ocurrió un error al procesar el archivo CSV.'",500)
