@@ -1,0 +1,143 @@
+{
+    "post_strategy": [
+        {
+            "titulo_estrategia": "Lanzamiento Exclusivo: Tenis Nike Hot Step Air Terra Drake NOCTA",
+            "objetivo_campana": "Generar ventas directas de los Tenis Nike Hot Step Air Terra Drake NOCTA, atraer nuevos clientes y fortalecer la imagen de Yaper SAS como proveedor confiable de moda urbana.",
+            "analisis_publico_objetivo": {
+                "perfil_demografico": "Adultos jóvenes de 18 a 30 años, principalmente hombres, residentes en áreas urbanas de Colombia. Interesados en moda urbana, música hip hop y cultura sneaker.",
+                "intereses": "Hiphop, arte, grafittis, cultura urbana, moda deportiva, coleccionismo de zapatillas, música de Drake, colaboraciones exclusivas."
+            },
+            "concepto_creativo_publicacion": {
+                "tipo_contenido": "Carrusel de imágenes de alta calidad mostrando los tenis desde diferentes ángulos, destacando detalles y la colaboración Drake x NOCTA. Incluir la imagen principal del producto y quizás una imagen contextualizada en un entorno urbano.",
+                "mensaje_principal": "Eleva tu estilo urbano con la exclusiva colaboración Nike x Drake. ¡Consigue los Tenis Hot Step Air Terra NOCTA y marca la diferencia!"
+            },
+            "copys_publicacion": [
+                {
+                    "enfoque": "Llamativo y de Valor",
+                    "texto": "🔥 ¡Estilo que marca tendencia! 🔥 Los Tenis Nike Hot Step Air Terra Drake NOCTA ya están aquí. Diseñados para los amantes de la moda urbana y la cultura hip hop. Llévatelos por solo $95 USD. ¡No te quedes sin los tuyos! Compra ahora: [Link a la tienda] #Nike #Drake #NOCTA #ModaUrbana #TenisExclusivos"
+                },
+                {
+                    "enfoque": "Informativo y Resolviendo Puntos de Dolor",
+                    "texto": "¿Buscas los últimos lanzamientos de moda urbana? Descubre los Tenis Nike Hot Step Air Terra Drake NOCTA. ✨ Consigue la exclusividad que amas a un precio accesible. ¡La colaboración que revoluciona tu look! Visita yaper.com para más detalles y compra segura. #YaperSas #Sneakerhead #EstiloUrbano #NikeDrake"
+                },
+                {
+                    "enfoque": "Directo y con Urgencia",
+                    "texto": "¡Edición limitada! Los Tenis Nike Hot Step Air Terra Drake NOCTA están disponibles. 👟 Conquista la calle con este diseño icónico. Precio especial de $95 USD. ¡Stock limitado! Haz clic aquí para asegurar los tuyos antes de que se agoten. 👉 [Link a la tienda] #TenisNike #DrakeNOCTA #CompraOnline"
+                }
+            ],
+            "hashtags": [
+                "#NikeHotStepAirTerra",
+                "#DrakeNOCTA",
+                "#TenisNike",
+                "#ModaUrbana",
+                "#SneakersColombia",
+                "#EstiloHipHop",
+                "#YaperSas",
+                "#ZapatillasExclusivas",
+                "#ColeccionistasDeTenis",
+                "#Drake"
+            ],
+            "sugerencias_segmentacion": {
+                "plataforma": "Facebook",
+                "datos_demograficos": "Hombres y mujeres, 18-30 años, residentes en ciudades principales de Colombia (Bogotá, Medellín, Cali, Barranquilla, etc.).",
+                "intereses_y_comportamientos": "Intereses en: Hiphop, cultura urbana, moda masculina, streetwear, zapatillas deportivas, marcas como Nike, Adidas, Yeezy, artistas como Drake. Comportamiento: Compradores en línea, interesados en moda y accesorios."
+            },
+            "kpis": [
+                "Tasa de clics (CTR) en el enlace de compra: Objetivo > 2.5%",
+                "Número de conversiones (ventas) directas generadas.",
+                "Alcance de la publicación.",
+                "Tasa de interacción (Engagement Rate): Likes, comentarios, compartidos.",
+                "Costo por clic (CPC) para optimizar la inversión."
+            ]
+        }
+    ],
+    "post_text": [
+        {
+            "text": "★ ¡Eleva tu juego con los Tenis Nike Hot Step Air Terra Drake NOCTA! ★\n\nDesata tu estilo urbano con esta colaboración exclusiva entre Nike y el icónico artista Drake. ¡Diseñados para quienes marcan tendencia!\n\n✨ ¡Oferta especial! Consigue los tuyos por solo $95 USD y siente la diferencia.\n\n¿Listo para destacar? Haz clic y compra ahora: [Link a la tienda]\n\n#Nike #Drake #NOCTA #ModaUrbana #TenisNike #Sneakers #EstiloUrbano #ColaboracionExclusiva #HipHop #YaperSas",
+            "imageMetadata": "{\n  \"alt_text\": \"Tenis Nike Hot Step Air Terra Drake NOCTA en color blanco y detalles negros, presentados en un entorno urbano minimalista.\"\n}"
+        }
+    ],
+    "image_description": [
+        {
+            "producto": "Tenis Nike Hot Step Air Terra Drake NOCTA",
+            "estilo": "Urbano, moderno, exclusivo, deportivo.",
+            "ambiente": "Sofisticado, urbano, con un toque de exclusividad y tendencia.",
+            "audiencia": "Adultos jóvenes de 18 a 30 años, interesados en moda urbana, música hip hop, y colaboraciones de artistas.",
+            "ubicacion": "Entorno urbano moderno, como una calle de ciudad con arquitectura limpia o un estudio minimalista.",
+            "escena": "Los tenis Nike Hot Step Air Terra Drake NOCTA en primer plano, mostrando detalles de diseño. Posiblemente con un fondo sutilmente desenfocado que sugiera un ambiente urbano.",
+            "foco": "Los tenis Nike Hot Step Air Terra Drake NOCTA, destacando su diseño único y la colaboración con Drake.",
+            "composicion": "Enfoque en el producto, con una composición que resalte los detalles y la estética de los tenis. Podría ser un plano detalle o un plano medio.",
+            "texto": "Eleva tu estilo con la exclusiva colaboración Nike x Drake. ¡Descubre los Tenis Hot Step Air Terra NOCTA!"
+        }
+    ],
+    "image_url": "https://storage.googleapis.com/publitron-32a7e.firebasestorage.app/empresas/GjOpqttUzxB5OiEMihig/ia_generated/178cd298-9129-4694-bca4-2b093e42a989.png"
+}
+
+{
+    "post_strategy": {
+        "titulo_estrategia": "Lanzamiento NOCTA x Drake: Estilo Urbano Accesible",
+        "objetivo_campana": "Generar ventas directas de los Tenis Nike Hot Step Air Terra Drake NOCTA, atraer nuevos clientes a Yaper SAS y fortalecer la percepción de la marca como proveedor confiable de réplicas AAA de alta gama.",
+        "analisis_publico_objetivo": {
+            "perfil_demografico": "Adultos jóvenes de 18 a 30 años, principalmente hombres, residentes en áreas urbanas de Colombia. Interesados en moda urbana, música hip hop, arte y cultura.",
+            "intereses": "Hiphop, arte, grafittis, cultura urbana, moda streetwear, sneakers, colaboraciones de artistas, música de Drake."
+        },
+        "concepto_creativo_publicacion": {
+            "tipo_contenido": "Story de Facebook (formato vertical). Se usará la imagen principal del producto, con texto superpuesto y un sticker interactivo de 'Desliza hacia arriba' para dirigir al enlace de compra. Se buscará un diseño dinámico que refleje la energía urbana y la exclusividad de la colaboración.",
+            "mensaje_principal": "Consigue el estilo icónico de Drake. ✨ Tenis Nike Hot Step Air Terra Drake NOCTA. ¡Edición exclusiva a un precio increíble!"
+        },
+        "copys_publicacion": [
+            {
+                "enfoque": "Llamativo y Exclusivo",
+                "texto": "¡Llegaron los Tenis Nike Hot Step Air Terra Drake NOCTA! 🔥 El estilo urbano que buscas, al alcance de tu mano. Consigue esta colaboración exclusiva a un precio que no podrás creer. ¡Desliza hacia arriba y eleva tu look! 👟 #NOCTA #Drake #Nike #Streetwear"
+            },
+            {
+                "enfoque": "Informativo y con Beneficio",
+                "texto": "¿Apasionado por el hip hop y la moda urbana? 🤔 Los Tenis Nike Hot Step Air Terra Drake NOCTA son tu próxima obsesión. Replicas AAA de alta calidad, inspirados en la cultura y el arte. ¡No te quedes sin los tuyos! Precio especial de $95 USD. ¡Compra ahora! 👉 [Link a la tienda]"
+            },
+            {
+                "enfoque": "Directo y de Oportunidad",
+                "texto": "¡Últimas unidades de los Tenis Nike Hot Step Air Terra Drake NOCTA! 🚀 Sé parte de la tendencia. Precio especial: $95 USD. ¡No pierdas esta oportunidad! Haz clic para comprar en Yaper SAS. 🛒 #TenisNike #ModaUrbana #DrakeCollection"
+            }
+        ],
+        "hashtags": [
+            "#NikeNOCTA",
+            "#Drake",
+            "#HotStepAirTerra",
+            "#ModaUrbana",
+            "#StreetwearColombia",
+            "#TenisDeModa",
+            "#CulturaUrbana",
+            "#SneakerHead",
+            "#YaperSAS",
+            "#RéplicasAAA"
+        ],
+        "sugerencias_segmentacion": {
+            "plataforma": "Facebook",
+            "datos_demograficos": "Hombres, 18-30 años, ubicados en ciudades principales de Colombia (Bogotá, Medellín, Cali, Barranquilla, etc.).",
+            "intereses_y_comportamientos": "Intereses en: Hip Hop, Drake, Música Rap, Moda Urbana, Streetwear, Sneakers, Graffiti, Arte Urbano, Compras online, Marcas deportivas (Nike, Adidas, etc.). Comportamiento: Compradores online, usuarios activos de redes sociales, interesados en moda y tendencias."
+        },
+        "kpis": [
+            "Tasa de Clics (CTR) en el sticker de 'Desliza hacia arriba': > 3%",
+            "Alcance de la Story: Maximizar la visibilidad en el público objetivo.",
+            "Número de visualizaciones de la Story.",
+            "Tasa de finalización de la Story.",
+            "Conversiones (ventas) generadas desde la Story: Objetivo > 10 ventas."
+        ]
+    },
+    "post_text": {
+        "text": "🔥 ¡Llegaron los Tenis Nike Hot Step Air Terra Drake NOCTA! 🔥 Consigue el estilo urbano que buscas con esta colaboración exclusiva. ✨ Precio especial: $95 USD. ¡No te quedes sin los tuyos! Desliza hacia arriba para comprar. 👟 #NikeNOCTA #Drake #ModaUrbana #StreetwearColombia #TenisDeModa",
+        "imageMetadata": "Imagen principal del producto: Tenis Nike Hot Step Air Terra Drake NOCTA."
+    },
+    "image_description": {
+        "producto": "Tenis Nike Hot Step Air Terra Drake NOCTA",
+        "estilo": "Urbano, exclusivo, moderno, deportivo.",
+        "ambiente": "Energético, aspiracional, nocturno, urbano.",
+        "audiencia": "Jóvenes adultos (18-30 años), interesados en moda urbana, hip hop y cultura.",
+        "ubicacion": "Entorno urbano nocturno en Colombia (ej. Medellín o Bogotá).",
+        "escena": "Una toma dinámica y ligeramente baja de los tenis en un entorno urbano con luces de neón o de la ciudad de fondo. Podría haber un leve desenfoque en el fondo para resaltar los tenis.",
+        "foco": "Primer plano de los Tenis Nike Hot Step Air Terra Drake NOCTA, mostrando detalles de diseño, materiales y la colaboración.",
+        "composicion": "Composición vertical optimizada para Story, con los tenis como elemento central, ocupando la mayor parte del encuadre.",
+        "texto": "¡Estilo Drake a tus pies! ✨ Tenis Nike Hot Step Air Terra Drake NOCTA. Colaboración exclusiva. Precio especial $95 USD. ¡Desliza hacia arriba y eleva tu look! 🔥 #NikeNOCTA #Drake"
+    },
+    "image_url": "https://storage.googleapis.com/publitron-32a7e.firebasestorage.app/empresas/GjOpqttUzxB5OiEMihig/ia_generated/8ca4930d-f0b7-444d-887b-4798d96860a3.png"
+}

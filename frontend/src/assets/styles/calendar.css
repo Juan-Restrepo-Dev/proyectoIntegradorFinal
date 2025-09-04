@@ -1008,6 +1008,31 @@
   display: flex;
   justify-content: space-around;
 }
+.modal-section {
+  padding: 3rem;
+}
+.modal-section img{
+  max-width: 90%;
+  height: auto;
+  border-radius: 8px;
+  border: var(--primary) 1px solid;
+}
+.generated-strategy {
+  max-width: 60%;
+  background-color: var(--primary);
+
+  border-radius: var(--border-radius) 0 0  var(--border-radius);
+}
+.generate-content{
+  max-width: 50%;
+  border-radius:  0 var(--border-radius) var(--border-radius) 0;
+}
+
+/* .copy-group {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 4rem;
+} */
 
 @keyframes slideIn {
   from {

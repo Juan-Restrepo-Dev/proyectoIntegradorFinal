@@ -1,5 +1,164 @@
+<!DOCTYPE html>
+<html lang="en">
 
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="../../assets/styles/main.css">
+    <link rel="stylesheet" href="../../assets/styles/components.css">
+    <link rel="stylesheet" href="../../assets/styles/calendar.css">
+    <link rel="stylesheet" href="../../assets/styles/entities.css">
+</head>
 
+<body>
+    <div class="modal-overlay active" id="modalOverlay">
+        <div class="modal-container">
+            <div class="modal-header">
+                <h3 class="modal-title">Nueva Publicación</h3>
+                <button class="modal-close" id="modalClose">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <line x1="18" y1="6" x2="6" y2="18"></line>
+                        <line x1="6" y1="6" x2="18" y2="18"></line>
+                    </svg>
+                </button>
+            </div>
+            <div class="modal-body" id="modalBody">
+ <div class="publication-modal-generated">
+                    <div class="modal-section generated-strategy">
+                        <h3>Estrategia Generada</h3>
+                        <div class="divider">
+                            <h4 class="center">Datos Generale</h4>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="generatedTitle">Título</label>
+                            <input type="text" id="generatedTitle"
+                                value="${this.generatedContent.post_strategy.titulo_estrategia || ""}">
+                        </div>
+                        <div class="form-group">
+                            <label for="generatedContent">Contenido</label>
+                            <textarea id="generatedContent"
+                                rows="6">${this.generatedContent.post_strategy.objetivo_campana || ""}</textarea>
+                        </div>
+                        <div class="divider">
+                            <h4 class="center">Análisis público Objetivo</h4>
+                        </div>
+
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="generatedDate">Perfil Demográfico</label>
+                                <textarea id="generatedDate" rows="4"
+                                    required="">${this.generatedContent.post_strategy.analisis_publico_objetivo.perfil_demografico || ""}</textarea>
+                            </div>
+                            <div class="form-group">
+                                <label for="generatedDate">Comportamiento en Redes Sociales</label>
+                                <textarea id="generatedDate" rows="4"
+                                    required="">${this.generatedContent.post_strategy.analisis_publico_objetivo.intereses || ""}</textarea>
+                            </div>
+                        </div>
+
+                        <div class="divider">
+                            <h4 class="center">concepto creativo publicacion</h4>
+                        </div>
+
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="generatedDate">Tipo de contenido</label>
+                                <textarea id="generatedDate" rows="4"
+                                    required="">${this.generatedContent.post_strategy.concepto_creativo_publicacion.tipo_contenido || ""}</textarea>
+                            </div>
+                            <div class="form-group">
+                                <label for="generatedDate">Estilo visual</label>
+                                <textarea id="generatedDate" rows="4"
+                                    required="">${this.generatedContent.post_strategy.concepto_creativo_publicacion.mensaje_principal || ""}</textarea>
+                            </div>
+
+                        </div>
+
+                        <div class="divider">
+                            <h4 class="center">Copys de publicación</h4>
+                        </div>
+
+                        <div id="copys-container" class="form-row">
+                        </div>
+                        <div class="divider">
+                            <h4 class="center">Hashtags Sugeridos</h4>
+                        </div>
+                        <div class="form-group">
+                            <label for="generatedHashtags">Hashtags</label>
+                            <div id="hashtags-container" class="tags-input-container">
+                                <input id="hashtagPublicationInput" type="text"
+                                    placeholder="Escribe un hashtag y presiona Enter">
+                            </div>
+                        </div>
+
+                        <div class="divider">
+                            <h4 class="center">Sugerencias de Segmentación</h4>
+                        </div>
+                        <div class="form-group">
+                            <label for="generatedLocation">plataforma</label>
+                            <input type="text" id="generatedLocation"
+                                value="${this.generatedContent.post_strategy.sugerencias_segmentacion.plataforma || ""}"
+                                required="">
+                        </div>
+                        <div class="form-group">
+                            <label for="generatedAudience">Datos Demográficos</label>
+                            <textarea id="generatedAudience" rows="4"
+                                required="">${this.generatedContent.post_strategy.sugerencias_segmentacion.datos_demograficos || ""}</textarea>
+                        </div>
+                        <div class="form-group">
+                            <label for="generatedInterests">Intereses y Comportamientos</label>
+                            <textarea id="generatedInterests" rows="4"
+                                required="">${this.generatedContent.post_strategy.sugerencias_segmentacion.intereses_y_comportamientos || ""}</textarea>
+                        </div>
+                        <div class="divider">
+                            <h4 class="center">KPI's Sugeridos</h4>
+                        </div>
+                        <div id="kpis-container">
+                        </div>
+
+                        <div class="form-group">
+
+                            <div class="form-actions">
+                                <button type="button" class="btn btn-ghost" id="regenerateContent">Regenerar</button>
+                                <button type="button" class="btn btn-primary" id="saveGeneratedContent">generar
+                                    publicidad en meta</button>
+                            </div>
+
+                        </div>
+
+                    </div>
+                    <div class="modal-section">
+                        <h4>Contenido Generado</h4>
+                        <div class="generated-content">
+                            <div class="form-group">
+                                <label for="generatedTitle">Texto de Publicación</label>
+                                <input type="text" id="generatedTitle" value=${this.generatedContent.post_text.text}>
+                            </div>
+                            <div class="form-group">
+                                <label for="generatedContent">Medios</label>
+                                <img src="https://storage.googleapis.com/publitron-32a7e.firebasestorage.app/empresas/GjOpqttUzxB5OiEMihig/ia_generated/178cd298-9129-4694-bca4-2b093e42a989.png"
+                                    alt="">
+                            </div>
+                        </div>
+                        <div class="form-actions">
+                            <button type="button" class="btn btn-ghost" id="regenerateContent">Regenerar</button>
+                            <button type="button" class="btn btn-primary" id="saveGeneratedContent">Programar</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+
+    </div>
+    </div>
+</body>
+
+</html>
+
+<!-- 
 
     <div class="publication-modal-generated">
         <div class="modal-section">
@@ -57,7 +216,7 @@
             </div>
         </div>
     </div>
-
+ -->
 
 
 
