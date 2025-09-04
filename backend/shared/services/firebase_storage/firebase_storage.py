@@ -9,7 +9,7 @@ async def upload_image_to_storage(file_content: bytes, destination_path: str, co
         blob = bucket.blob(destination_path)
         blob.upload_from_string(file_content, content_type=content_type)
         blob.make_public()
-        return await blob.public_url
+        return blob.public_url 
     except Exception as e:
         print(f"Error al subir la imagen a Storage: {e}")
         return None

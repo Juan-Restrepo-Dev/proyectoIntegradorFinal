@@ -8,7 +8,7 @@ from io import BytesIO
 import json
 from core.middleware.firebase_auth_guard import get_current_user_and_role
 from core.config import firestore_db
-from apps.generator.templates_prompt import format_system_prompt_strategy, format_sytem_prompt_image_description, format_sytem_prompt_text_post
+from apps.generator.templates_prompt import format_system_prompt_strategy, format_system_prompt_image_description, format_sytem_prompt_text_post
 from apps.generator.schema import SocialPostRequest
 from shared.services.ai.google.image import generate_ad_content
 from shared.services.ai.google.system_instructions import generate_inference_instructions
@@ -148,36 +148,49 @@ async def generate_post_strategy(data_strategy):
     return response
 #   print("estrategia generada:", strategy)
 
-def generate_post_text(data_post_text):
+async def generate_post_text(data_post_text):
     if isinstance(data_post_text, dict):
         data_dict = data_post_text
     else:
         data_dict = data_post_text.model_dump() if hasattr(data_post_text, 'model_dump') else data_post_text.dict()
-    post_text = generate_inference_instructions(
+    post_text = await generate_inference_instructions(
         format_sytem_prompt_text_post(data_dict),
         str(data_dict),
         json_schema_text_post,
         my_project_id
     )
-    return post_text
+    response = []
+    for part in post_text:
+        if part.text is not None:
+                print("--- Texto Generado por la IA ---")
+                print("estrategia generada:",part.text)
+                response.append(json.loads(part.text))
+    return response
 
-def generate_image_description(data_image_description):
+
+async def generate_image_description(data_image_description):
     if isinstance(data_image_description, dict):
         data_dict = data_image_description
     else:
         data_dict = data_image_description.model_dump() if hasattr(data_image_description, 'model_dump') else data_image_description.dict()
-    image_description = generate_inference_instructions(
-        format_sytem_prompt_image_description(data_dict),
+    
+    image_description = await generate_inference_instructions(
+        format_system_prompt_image_description(data_dict),
         str(data_dict),
         json_schema_image_description,
         my_project_id
     )
-    return image_description
+    response = []
+    for part in image_description:
+        if part.text is not None:
+                print("--- Texto Generado por la IA ---")
+                print("estrategia generada:",part.text)
+                response.append(json.loads(part.text))
+    return response
+
 
 async def generate_image(url,PromptImage,company_id):     
 
-   
-    url_image= ""
     generated_parts = generate_ad_content(
         image_context_url = url,
         prompt_text=PromptImage,
@@ -189,24 +202,23 @@ async def generate_image(url,PromptImage,company_id):
         if part.text is not None:
             print("--- Texto Generado por la IA ---")
             print(part.text)
-        if part.inline_data is not None:
-            if part.inline_data.data is not None:
+        if part.inline_data is not None and part.inline_data :
+            if isinstance(part.inline_data.data, (bytes, bytearray)):
                 filename = f"{uuid.uuid4()}"
                 destination_path = f"empresas/{company_id}/ia_generated/{filename}"
                 image = Image.open(BytesIO(part.inline_data.data))   
-                image.save("generated_image.png")
+                image.save(f"{filename}.png")
                 print("\n--- Imagen Generada por la IA ---")
-                print("Imagen guardada como 'generated_image.png'")
+                print(f"Imagen guardada como '{filename}.png'")
                 image_url = await upload_image_to_storage(part.inline_data.data,  destination_path , part.inline_data.mime_type)
                 return image_url
             else:
-                print("No se generó imagen.")    
-                # print("intentandolo nuevamente.")
-                # generate_image(url,PromptImage)
+                print("No se  interpreto el formato de imagen.")    
+                print("intentandolo nuevamente.")
+                generate_image(url,PromptImage,company_id)
         else:
+            print("part",part)
             
-            print("No se generó imagen hubo un error.")
-            
 
 
 
@@ -214,7 +226,7 @@ async def generate_image(url,PromptImage,company_id):
 
 
 
-async def generate_social_post(basePrompt:SocialPostRequest,    user_data: dict = Depends(get_current_user_and_role)):
+async def generate_social_post(basePrompt:SocialPostRequest,user_data: dict = Depends(get_current_user_and_role)):
     empresa_id = user_data.get('companyId')
     print(f"Obteniendo datos para la empresa: {empresa_id}")
     company_data_ref = firestore_db.collection('companies').document(empresa_id)

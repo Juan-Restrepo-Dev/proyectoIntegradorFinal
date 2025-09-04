@@ -106,7 +106,7 @@ def format_sytem_prompt_text_post(prompt_data):
     "post_estrategy": {post_strategy}
 
     Instrucciones de formato:
-      importante! debes responder en estructura json Debes responder únicamente con el texto del post No agreggues datos adicionales. No incluyas ningún texto introductorio, explicaciones, encabezados, viñetas o cualquier otro formato. La respuesta debe ser un bloque de texto plano, listo para ser copiado y pegado directamente en la red social.
+      importante! debes responder en estructura json Debes responder únicamente. No incluyas ningún texto introductorio, explicaciones, encabezados, viñetas o cualquier otro formato. La respuesta debe ser un bloque de texto plano, listo para ser copiado y pegado directamente en la red social.
     """
     prompt = PromptTemplate(
         input_variables=["platform_to_publish", "product_data", "company_data", "post_strategy"],
@@ -120,7 +120,7 @@ def format_sytem_prompt_text_post(prompt_data):
     )
     return final_prompt
 
-def format_sytem_prompt_image_description(prompt_data):
+def format_system_prompt_image_description(prompt_data):
     platform_json = json.dumps(prompt_data["platform_to_publish"], indent=2)
     product_json = json.dumps(prompt_data["product_data"], indent=2)
     company_json = json.dumps(prompt_data["company_data"], indent=2)

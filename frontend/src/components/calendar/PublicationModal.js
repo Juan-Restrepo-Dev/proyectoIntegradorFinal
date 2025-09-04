@@ -215,7 +215,7 @@ export class PublicationModal extends Modal {
     super.render();
     super.addEventListeners();
     const modalCloseBtn = this.getElement('#modalClose');
-  if (modalCloseBtn) modalCloseBtn.onclick = () => this.close();
+    if (modalCloseBtn) modalCloseBtn.onclick = () => this.close();
   }
 
   afterRender() {
@@ -331,15 +331,15 @@ export class PublicationModal extends Modal {
           product_data: selectedRecord,
           ia_settings: {
             tone: this.getElement('#aiTone').value,
-            prompt: this.getElement('#aiPrompt').value 
-            || "",
+            prompt: this.getElement('#aiPrompt').value
+              || "",
           }
         };
         const publicationData = {
           platform: this.getElement('#pubPlatform').value,
           date: this.getElement('#pubDate').value,
           time: this.getElement('#pubTime').value,
-          type: 'post',
+          type: this.getElement('#pubType').value,
           status: 'scheduled',
           generatedByAI: true
         };
@@ -385,13 +385,17 @@ export class PublicationModal extends Modal {
     }
 
     try {
-      const aiResponse = await generateSocialPost(basePrompt,AuthService.getAuthToken());
+      const aiResponse = await generateSocialPost(basePrompt, AuthService.getAuthToken());
       console.log("Respuesta IA:", await aiResponse);
       this.generatedContent = {
-        title: `Nuevo ${publicationData.platform.charAt(0).toUpperCase() + publicationData.platform.slice(1)} Post`,
-        content: `¡Descubre las increíbles ventajas de nuestros servicios!`,
-        platform: publicationData.platform,
-        tone: publicationData.tone
+        post_strategy: aiResponse.post_strategy,
+        post_text: aiResponse.post_text,
+        image_description: aiResponse.image_description,
+        image_url_
+        // title: `Nuevo ${publicationData.platform.charAt(0).toUpperCase() + publicationData.platform.slice(1)} Post`,
+        // content: `¡Descubre las increíbles ventajas de nuestros servicios!`,
+        // platform: publicationData.platform,
+        // tone: publicationData.tone
       };
       this.showGeneratedContent();
     } catch (error) {
@@ -404,6 +408,7 @@ export class PublicationModal extends Modal {
       }
     }
   }
+
   showGeneratedContent() {
     this.currentStep = 'generated';
     this.render();
@@ -411,40 +416,101 @@ export class PublicationModal extends Modal {
 
   renderGeneratedStep() {
     this.data.content = `
-    <div class="publication-modal-generated">
-      <div class="modal-section">
-        <h4>Contenido Generado</h4>
-        <div class="generated-content">
-          <div class="form-group">
-            <label for="generatedTitle">Título</label>
-            <input type="text" id="generatedTitle" value="${this.generatedContent.title}">
-          </div>
-          <div class="form-group">
-            <label for="generatedContent">Contenido</label>
-            <textarea id="generatedContent" rows="6">${this.generatedContent.content}</textarea>
-          </div>
-          <div class="form-row">
-            <div class="form-group">
-              <label for="generatedDate">Fecha</label>
-              <input type="date" id="generatedDate" value="${this.selectedDate || ''}" required>
+       <div class="publication-modal-generated">
+        <div class="modal-section">
+            <h4>Estrategia Generada</h4>
+            <div class="generated-content">
+                <div class="form-group">
+                    <label for="generatedTitle">Título de la estrategia</label>
+                    <input type="text" id="generatedTitle" value="${this.generatedContent.post_strategy.titulo_estrategia}">
+                </div>
+                <div class="form-group">
+                    <label for="generatedContent">Objetivo de la campaña</label>
+                    <textarea id="generatedContent" rows="6">${this.generatedContent.post_strategy.objetivo_campana}</textarea>
+                </div>
+                <div class="divider"><span class="center">Analisis publico Onjetivo</span></div>
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="generatedDate">Fecha</label>
+                        <input type="date" id="generatedDate" value="${this.generatedContent.post_strategy.analisis_publico_objetivo.perfil_demografico || ''}" required>
+                        <label for="generatedTime">Hora</label>
+                        <input type="time" id="generatedTime" value="${this.generatedContent.post_strategy.analisis_publico_objetivo.intereses || ''}" required>
+                    </div>
+                    <div class="form-group">
+                        
+                    </div>
+                </div>
             </div>
-            <div class="form-group">
-              <label for="generatedTime">Hora</label>
-              <input type="time" id="generatedTime" value="${this.selectedTime || ''}" required>
+            <div class="form-actions">
+                <button type="button" class="btn btn-ghost" id="regenerateContent">Regenerar</button>
+                <button type="button" class="btn btn-primary" id="saveGeneratedContent">Programar</button>
             </div>
-          </div>
         </div>
-        <div class="form-actions">
-          <button type="button" class="btn btn-ghost" id="regenerateContent">Regenerar</button>
-          <button type="button" class="btn btn-primary" id="saveGeneratedContent">Programar</button>
+        <div class="modal-section">
+            <h4>Contenido Generado</h4>
+            <div class="generated-content">
+                <div class="form-group">
+                    <label for="generatedTitle">Título</label>
+                    <input type="text" id="generatedTitle" value="${this.generatedContent.title}">
+                </div>
+                <div class="form-group">
+                    <label for="generatedContent">Contenido</label>
+                    <textarea id="generatedContent" rows="6">${this.generatedContent.content}</textarea>
+                </div>
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="generatedDate">Fecha</label>
+                        <input type="date" id="generatedDate" value="${this.generatedContent.post_strategy.analisis_publico_objetivo.perfil_demografico || ''}" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="generatedTime">Hora</label>
+                        <input type="time" id="generatedTime" value="${this.generatedContent.post_strategy.analisis_publico_objetivo.intereses || ''}" required>
+                    </div>
+                </div>
+            </div>
+            <div class="divider"><span class="center">Copys de Publicación</span></div>
+            <div class="form-row" >
+              ${copysHtml}
+            </div>  
+            <div class="divider">Hashtag de la publicacion</div>
+            <div class="form-row" >
+             <div id="hashtags-container" class="tags-input-container">
+                    <input id="hashtagPublicationInput" type="text" placeholder="Escribe un interés y presiona Enter">
+             </div>
+            
+            </div>
+
+
+
+            
+            <div class="form-actions">
+                <button type="button" class="btn btn-ghost" id="regenerateContent">Regenerar</button>
+                <button type="button" class="btn btn-primary" id="saveGeneratedContent">Programar</button>
+            </div>
         </div>
-      </div>
     </div>
   `;
     super.render();
     const regenerateBtn = this.getElement('#regenerateContent');
     const saveBtn = this.getElement('#saveGeneratedContent');
     const closeBtns = this.container.querySelectorAll('.btn-ghost, .modal-header button');
+    const HashtagInput = document.getElementById("hashtagPublicationInput");
+    let copysHtml = '';
+    this.generatedContent.copys_publicacion.forEach(copy => {
+      copysHtml += `
+        <div class="form-group copy-group">
+            <label>Enfoque: <strong>${copy.enfoque}</strong></label>
+            <textarea rows="4">${copy.texto}</textarea>
+        </div>
+    `;
+    });
+    interestsInput.addEventListener("keypress", (e) => {
+      if (e.key === "Enter" && HashtagInput.value.trim() !== "") {
+        e.preventDefault();
+        this.addHastagTag(HashtagInput.value.trim());
+        HashtagInput.value = "";
+      }
+    });
     if (regenerateBtn) regenerateBtn.addEventListener('click', () => {
       this.close();
       setTimeout(() => {
@@ -458,6 +524,11 @@ export class PublicationModal extends Modal {
         btn.onclick = () => this.close();
       }
     });
+    
+  }
+  addHastagTag(text){
+    const HashtagInput = document.getElementById("audience_interests_input");
+     const interestsContainer = document.getElementById("interests-container");
   }
 
   saveGeneratedPublication() {

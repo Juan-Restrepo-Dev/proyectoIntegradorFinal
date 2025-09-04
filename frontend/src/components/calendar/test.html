@@ -1,4 +1,67 @@
-<div class="publication-modal-ai">
+
+
+
+    <div class="publication-modal-generated">
+        <div class="modal-section">
+            <h4>Estrategia Generada</h4>
+            <div class="generated-content">
+                <div class="form-group">
+                    <label for="generatedTitle">Título</label>
+                    <input type="text" id="generatedTitle" value="${this.generatedContent.title}">
+                </div>
+                <div class="form-group">
+                    <label for="generatedContent">Contenido</label>
+                    <textarea id="generatedContent" rows="6">${this.generatedContent.content}</textarea>
+                </div>
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="generatedDate">Fecha</label>
+                        <input type="date" id="generatedDate" value="${this.selectedDate || ''}" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="generatedTime">Hora</label>
+                        <input type="time" id="generatedTime" value="${this.selectedTime || ''}" required>
+                    </div>
+                </div>
+            </div>
+            <div class="form-actions">
+                <button type="button" class="btn btn-ghost" id="regenerateContent">Regenerar</button>
+                <button type="button" class="btn btn-primary" id="saveGeneratedContent">Programar</button>
+            </div>
+        </div>
+        <div class="modal-section">
+            <h4>Contenido Generado</h4>
+            <div class="generated-content">
+                <div class="form-group">
+                    <label for="generatedTitle">Título</label>
+                    <input type="text" id="generatedTitle" value="${this.generatedContent.title}">
+                </div>
+                <div class="form-group">
+                    <label for="generatedContent">Contenido</label>
+                    <textarea id="generatedContent" rows="6">${this.generatedContent.content}</textarea>
+                </div>
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="generatedDate">Fecha</label>
+                        <input type="date" id="generatedDate" value="${this.selectedDate || ''}" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="generatedTime">Hora</label>
+                        <input type="time" id="generatedTime" value="${this.selectedTime || ''}" required>
+                    </div>
+                </div>
+            </div>
+            <div class="form-actions">
+                <button type="button" class="btn btn-ghost" id="regenerateContent">Regenerar</button>
+                <button type="button" class="btn btn-primary" id="saveGeneratedContent">Programar</button>
+            </div>
+        </div>
+    </div>
+
+
+
+
+<!-- <div class="publication-modal-ai">
     <div class="modal-section">
         <h4>Generar contenido con IA</h4>
             <form id="aiForm" class="ai-form">
@@ -64,4 +127,4 @@
                 </div>
             </form>
     </div>
-</div>
+</div> -->

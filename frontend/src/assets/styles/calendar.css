@@ -1004,6 +1004,11 @@
   border: 1px solid #bfdbfe;
 }
 
+.publication-modal-generated{  
+  display: flex;
+  justify-content: space-around;
+}
+
 @keyframes slideIn {
   from {
     transform: translateX(100%);
